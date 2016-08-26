@@ -195,6 +195,48 @@ class SimplifiedExpensesCheckerTest < ActiveSupport::TestCase
         assert_state_variable :can_use_simple, false
       end
     end # new dirty vehicle
+
+    context "new filthy vehicle costs 10000, 80% of time on business, expect to drive 2000 miles, (Q3, Q4, Q5, Q9, result 2)" do
+      setup do
+        add_response "new"
+        add_response "high" #emissions
+        add_response "10000" #dirty_vehicle_price
+        add_response "80" #dirty_vehicle_write_off
+        add_response "2000" #simple_vehicle_costs
+      end
+
+      should "take you to result 2 - main result" do
+        assert_current_node :you_can_use_result
+        assert_state_variable :vehicle_filthiness, 'filthy'
+        assert_state_variable :filthy_vehicle_price, 800
+        assert_state_variable :filthy_vehicle_write_off, 640
+        assert_state_variable :simple_vehicle_costs, 900
+        assert_state_variable :current_scheme_costs, 640
+        assert_state_variable :simple_total, 900
+        assert_state_variable :can_use_simple, true
+      end
+    end # new filthy vehicle
+
+    context "used filthy vehicle costs 10000, 80% of time on business, expect to drive 2000 miles, (Q3, Q4, Q5, Q9, result 2)" do
+      setup do
+        add_response "used"
+        add_response "high" #emissions
+        add_response "10000" #dirty_vehicle_price
+        add_response "80" #dirty_vehicle_write_off
+        add_response "2000" #simple_vehicle_costs
+      end
+
+      should "take you to result 2 - main result" do
+        assert_current_node :you_can_use_result
+        assert_state_variable :vehicle_filthiness, 'filthy'
+        assert_state_variable :filthy_vehicle_price, 800
+        assert_state_variable :filthy_vehicle_write_off, 640
+        assert_state_variable :simple_vehicle_costs, 900
+        assert_state_variable :current_scheme_costs, 640
+        assert_state_variable :simple_total, 900
+        assert_state_variable :can_use_simple, true
+      end
+    end # used filthy vehicle
   end # end main result, existing business, car_or_van only
 
   context "home for business costs" do
@@ -320,6 +362,48 @@ class SimplifiedExpensesCheckerTest < ActiveSupport::TestCase
         assert_state_variable :can_use_simple, true
       end
     end # used dirty vehicle
+
+    context "new filthy vehicle costs 10000, 80% of time on business, expect to drive 12000 miles, (Q3, Q4, Q5, Q9, result 2)" do
+      setup do
+        add_response "new"
+        add_response "high" #emissions
+        add_response "10000" #dirty_vehicle_price
+        add_response "80" #dirty_vehicle_write_off
+        add_response "12000" #simple_vehicle_costs
+      end
+
+      should "take you to result 2 - main result" do
+        assert_current_node :you_can_use_result
+        assert_state_variable :vehicle_filthiness, 'filthy'
+        assert_state_variable :filthy_vehicle_price, 800
+        assert_state_variable :filthy_vehicle_write_off, 640
+        assert_state_variable :simple_vehicle_costs, 5000
+        assert_state_variable :current_scheme_costs, 640
+        assert_state_variable :simple_total, 5000
+        assert_state_variable :can_use_simple, true
+      end
+    end # new filthy vehicle
+
+    context "used filthy vehicle costs 10000, 80% of time on business, expect to drive 12000 miles, (Q3, Q4, Q5, Q9, result 2)" do
+      setup do
+        add_response "used"
+        add_response "high" #emissions
+        add_response "10000" #filthy_vehicle_price
+        add_response "80" #filthy_vehicle_write_off
+        add_response "12000" #simple_vehicle_costs
+      end
+
+      should "take you to result 2 - main result" do
+        assert_current_node :you_can_use_result
+        assert_state_variable :vehicle_filthiness, 'filthy'
+        assert_state_variable :filthy_vehicle_price, 800
+        assert_state_variable :filthy_vehicle_write_off, 640
+        assert_state_variable :simple_vehicle_costs, 5000
+        assert_state_variable :current_scheme_costs, 640
+        assert_state_variable :simple_total, 5000
+        assert_state_variable :can_use_simple, true
+      end
+    end # used filthy vehicle
 
     context "new green vehicle costs 260000, 100% of time on business, expect to drive 2000 miles, (Q3, Q6, Q7, Q8, Q9, result 2)" do
       setup do
@@ -467,6 +551,46 @@ class SimplifiedExpensesCheckerTest < ActiveSupport::TestCase
         assert_state_variable :can_use_simple, false
       end
     end # used dirty vehicle
+    context "new filthy motorcycle costs 5000, 80% of time on business, expect to drive 2000 miles, (Q3, Q6, Q7, Q8, Q10 result 2)" do
+      setup do
+        add_response "new"
+        add_response "high" #emissions
+        add_response '10000' #dirty_vehicle_price
+        add_response "80" #dirty_vehicle_write_off
+        add_response "2000" #simple_motorcycle_costs
+      end
+
+      should "take you to result 2 - main result" do
+        assert_current_node :you_can_use_result
+        assert_state_variable :vehicle_filthiness, 'filthy'
+        assert_state_variable :filthy_vehicle_price, 800
+        assert_state_variable :filthy_vehicle_write_off, 640
+        assert_state_variable :simple_motorcycle_costs, 480
+        assert_state_variable :current_scheme_costs, 640
+        assert_state_variable :simple_total, 480
+        assert_state_variable :can_use_simple, false
+      end
+    end # new filthy vehicle
+    context "used filthy motorcycle costs 5000, 80% of time on business, expect to drive 2000 miles, (Q3, Q6, Q7, Q8, Q10 result 2)" do
+      setup do
+        add_response "used"
+        add_response "high" #emissions
+        add_response '10000' #dirty_vehicle_price
+        add_response "80" #dirty_vehicle_write_off
+        add_response "2000" #simple_motorcycle_costs
+      end
+
+      should "take you to result 2 - main result" do
+        assert_current_node :you_can_use_result
+        assert_state_variable :vehicle_filthiness, 'filthy'
+        assert_state_variable :filthy_vehicle_price, 800
+        assert_state_variable :filthy_vehicle_write_off, 640
+        assert_state_variable :simple_motorcycle_costs, 480
+        assert_state_variable :current_scheme_costs, 640
+        assert_state_variable :simple_total, 480
+        assert_state_variable :can_use_simple, false
+      end
+    end # used filthy vehicle
   end # main result, existing business, motorcycle only
 
   context "main result - existing business, using home (Q1, Q2, Q11, Q12, result 2)" do
