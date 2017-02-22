@@ -20,22 +20,23 @@ gem 'plek', '1.12.0'
 gem 'rack_strip_client_ip', '0.0.1'
 gem 'rails-i18n'
 gem 'sass-rails', '~> 5.0.0'
-gem 'slimmer', '~> 9.0.1'
+gem 'slimmer', '~> 10.0.0'
 gem 'tilt', '1.4.1'
 gem 'uglifier'
 gem 'uk_postcode', '~> 1.0.1'
 gem 'unicorn', '4.8.3'
 gem 'rails_stdout_logging'
-gem 'govuk_navigation_helpers', '~> 2.0'
+gem 'govuk_navigation_helpers', '~> 2.3.1'
+gem 'govuk_ab_testing', '0.1.4'
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'govuk-lint'
   gem 'nokogiri'
 end
 
 group :development, :test do
+  gem 'govuk-lint'
   gem 'pry'
 end
 
